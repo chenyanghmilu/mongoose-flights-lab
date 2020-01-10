@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<table>
+	<tr>
+    <th>Airport</th>
+		<th>Airline</th>
+		<th>Flight No.</th>
+    <th>Departure Date</th>
+    <th>Details</th>
+	</tr>
+
+  <% let sort = flights.sort((a,b) => a.departs > b.departs); %>
+  <%sort.forEach((flight, i) => { %>
+    <% if (flight.departs < new Date()) { %>
+	<tr style="color:red">
+		<% } else { %>
+	</tr>
+	<tr>
+    <% } %>
+    <td><%= flight.airport %></td>
+		<td><%= flight.airline %></td>
+		<td><%= flight.flightNo %></td>
+    <td><%= flight.departs %></td>
+    <td><a href="/flights/<%= flight._id%>/details" class="button" >More</a></td>
+	</tr>
+	<% }); %>
+</table>
+<%- include('../partials/footer') %>

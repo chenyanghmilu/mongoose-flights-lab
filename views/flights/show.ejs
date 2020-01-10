@@ -1,0 +1,86 @@
+<%- include('../partials/header') %>
+
+<table>
+	<tr>
+		<th>Airport</th>
+		<th>Airline</th>
+		<th>Flight Number</th>
+		<th>Departure Time</th>
+	</tr>
+	<tr>
+		<td><%= flight.airport %></td>
+		<td><%= flight.airline %></td>
+		<td><%= flight.flightNo %></td>
+		<td><%= flight.departs %></td>
+	</tr>
+</table>
+
+<h2>Destination</h2>
+<table>
+	<tr>
+		<th>Airport</th>
+		<th>Arrival Time</th>
+    </tr>
+    <% if (flight.destinations.length) { %>
+    <% let sorted = flight.destinations.sort((a,b) => a.arrival > b.arrival); %>
+    <% sorted.forEach((destination) => { %>
+    <tr>
+        <td><%= destination.airport %></td>
+        <td><%= destination.arrival %></td>
+    </tr>
+    <% })} else { %>
+    <tr>
+        <td>N/A</td>
+        <td>N/A</td>
+    </tr>
+	<% } %>
+</table>
+
+<h2>Add Destination</h2>
+<form action="/flights/<%= flight._id %>/destinations" method="POST">
+	<label>Airport:</label>
+	<select name="airport">
+    <% let options = ['AUS', 'DAL', 'LAX', 'SEA']; %>
+    <% let destinationAirports = flight.destinations.map(destination => destination.airport ) %>
+    <% options.forEach(option => { %>
+    <% if (!(option === flight.airport) && !(destinationAirports.includes(option))) { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% } %>
+    <% }) %>
+</select><br />
+    <label>Arrival: <input type="datetime-local" name="arrival" /> </label>
+    <br />
+	<input class="button" type="submit" value="Submit" />
+</form>
+
+<h2>Tickets</h2>
+<table>
+    <tr>
+    <th>Seat</th>
+    <th>Price</th>
+    <th></th>
+    </tr>
+    <%if (tickets.length) { %>
+    <% tickets.forEach((ticket) => { %>
+    <tr>
+        <td><%= ticket.seat %></td>
+        <td>$<%= ticket.price %></td>
+        <td>
+        <form action="/flights/<%= ticket._id %>/tickets?_method=DELETE" method="POST">
+            <button type="submit">X</button>
+        </form>
+        </td>
+    </tr>
+    <% }) %>
+    <% } else { %>
+    <tr>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td></td>
+    </tr>
+    <% } %>
+</table>
+
+<a href="/flights/<%= flight._id %>/tickets/new" class="button" >New Ticket</a>
+
+<%- include('../partials/footer') %>
