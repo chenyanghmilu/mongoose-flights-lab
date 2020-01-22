@@ -1,26 +1,27 @@
-<%- include('../partials/header') %>
-<form action="/flights" method="POST">
-  <label>Airport:
-		<select name="airport">
-			<option value="AUS">AUS</option>
-			<option value="DAL">DAL</option>
-      <option value="LAX">LAX</option>
-      <option value="SEA">SEA</option>
-    </select>
-  </label>
-  <br>
-	<label>Airline:
-		<select name="airline">
-			<option value="American">American</option>
-			<option value="Southwest">Southwest</option>
-			<option value="United">United</option>
-    </select>
-  </label>
-  <br>
-	<label>Flight Number: <input type="text" name="flightNo" /></label><br>
-  <label>Departure Time: <input type="datetime-local" name="departs" /></label><br>
-  <br>
-  <input class="button" type="submit" value="Add Flight" />
-</form>
+<% - include('../partials/header') %>
+    <form action="/flights" method="POST">
+        <label>Airport:
+	<select name="airport">
+				<option value="AUS">AUS</option>
+				<option value="DAL">DAL</option>
+				<option value="LAX">LAX</option>
+				<option value="SEA">SEA</option>
+			</select>
+		</label>
+        <br />
+        <label>Airline:
+	<select name="airline">
+				<option value="American">American</option>
+				<option value="Southwest">Southwest</option>
+				<option value="United">United</option>
+			</select>
+		</label>
+        <br />
+        <label>Flight Number: <input type="text" name="flightNo" /></label><br />
+        <label>Departure Time: <input type="datetime-local" name="departs" /></label
+		><br />
+		<br />
+		<input class="button" type="submit" value="Add Flight" />
+	</form>
 
-<%- include('../partials/footer') %>
+	<% - include('../partials/footer') %>
